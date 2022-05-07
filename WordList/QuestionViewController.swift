@@ -8,11 +8,11 @@
 import UIKit
 
 class QuestionViewController: UIViewController {
-    
+
     @IBOutlet var answerLabel: UILabel!
     @IBOutlet var questionLabel: UILabel!
     @IBOutlet var nextButton: UIButton!
-    
+
     var isAnswered: Bool = false
     var wordArray: [Dictionary<String,String>] = []
     var nowNumber: Int = 0
@@ -20,15 +20,14 @@ class QuestionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         answerLabel.text = ""
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        super.viewWillAppear(true)
         
-        wordArray = saveData.array(forKey: "WORD") as! [Dictionary<String,String>]
-        
+        wordArray = saveData.array(forKey: "WORD") as! [Dictionary<String, String>]
         wordArray.shuffle()
         questionLabel.text = wordArray[nowNumber]["english"]
     }
@@ -44,9 +43,13 @@ class QuestionViewController: UIViewController {
                 nextButton.setTitle("答えを表示", for: .normal)
             }else{
                 nowNumber = 0
-                nextButton.setTitle("次へ", for: .normal)
+                performSegue(withIdentifier: "toFinishView", sender: nil)
             }
+        }else{
+            answerLabel.text = wordArray[nowNumber]["japanese"]
+            isAnswered = true
+            nextButton.setTitle("次へ", for: .normal)
         }
     }
-
+    
 }

@@ -24,6 +24,7 @@ class AddViewController: UIViewController {
     }
     
     @IBAction func saveWord(){
+        if englishTextField.text! == "" || japaneseTextField.text! == "" { return }
         let wordDictionary = ["english": englishTextField.text!, "japanese": japaneseTextField.text!]
         
         wordArray.append(wordDictionary)

@@ -27,6 +27,9 @@
                                     <fontDescription key="titleFontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="30"/>
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="startButtonTapped" destination="BYZ-38-t0r" eventType="touchUpInside" id="Amw-eN-FfJ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g2D-yg-jv1">
                                 <rect key="frame" x="155" y="655" width="104" height="34"/>
@@ -36,6 +39,7 @@
                                     <fontDescription key="titleFontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="20"/>
                                 </buttonConfiguration>
                                 <connections>
+                                    <action selector="backWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="acQ-z0-LNz"/>
                                     <segue destination="IPz-du-cbz" kind="presentation" modalPresentationStyle="fullScreen" id="Lcu-uK-68C"/>
                                 </connections>
                             </button>
@@ -107,6 +111,9 @@
                                     <fontDescription key="titleFontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="30"/>
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="nextButtonTapped" destination="CDu-XX-mVF" eventType="touchUpInside" id="dPT-mX-4NH"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Dvv-Nm-uUk"/>
@@ -132,6 +139,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="answerLabel" destination="PRN-1k-eAc" id="waD-F4-leN"/>
+                        <outlet property="nextButton" destination="R0v-6c-3RO" id="mVf-cG-eV6"/>
+                        <outlet property="questionLabel" destination="Qw8-aC-4Pt" id="lVZ-sy-NNp"/>
                         <segue destination="BN5-Ew-KDk" kind="presentation" identifier="toFinishView" modalPresentationStyle="fullScreen" id="xkC-jr-xjX"/>
                     </connections>
                 </viewController>
@@ -148,13 +158,45 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Vd4-a9-LPB">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="70" id="Vd4-a9-LPB" customClass="ListTableViewCell" customModule="WordList" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Vd4-a9-LPB" id="PMq-44-0W3">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="EWl-Ac-BHz">
+                                            <rect key="frame" x="20" y="0.0" width="394" height="70"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cyw-Jv-1Sg">
+                                                    <rect key="frame" x="0.0" y="0.0" width="128.5" height="70"/>
+                                                    <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="17"/>
+                                                    <color key="textColor" systemColor="linkColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y1Z-6O-dVw">
+                                                    <rect key="frame" x="136.5" y="0.0" width="257.5" height="70"/>
+                                                    <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Y1Z-6O-dVw" firstAttribute="width" secondItem="Cyw-Jv-1Sg" secondAttribute="width" multiplier="2" id="8o7-u0-8Lk"/>
+                                            </constraints>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="EWl-Ac-BHz" firstAttribute="leading" secondItem="PMq-44-0W3" secondAttribute="leading" constant="20" id="S1Y-z4-b9b"/>
+                                        <constraint firstAttribute="trailing" secondItem="EWl-Ac-BHz" secondAttribute="trailing" id="VtW-2I-Khq"/>
+                                        <constraint firstAttribute="bottom" secondItem="EWl-Ac-BHz" secondAttribute="bottom" id="lw4-7w-U1g"/>
+                                        <constraint firstItem="EWl-Ac-BHz" firstAttribute="top" secondItem="PMq-44-0W3" secondAttribute="top" id="tuB-DY-xRg"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="englishLabel" destination="Cyw-Jv-1Sg" id="KXe-6Y-j4H"/>
+                                    <outlet property="japaneseLabel" destination="Y1Z-6O-dVw" id="ANf-mz-L0a"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -163,7 +205,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="一覧" id="ugs-XD-9bN">
-                        <barButtonItem key="leftBarButtonItem" title="もどる" id="VGF-ca-pPq"/>
+                        <barButtonItem key="leftBarButtonItem" title="もどる" id="VGF-ca-pPq">
+                            <connections>
+                                <segue destination="45g-XB-RPc" kind="unwind" unwindAction="backWithSender:" id="IdD-dd-L0M"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="9bx-HV-umK">
                             <connections>
                                 <segue destination="QuQ-Sc-jYh" kind="show" id="NJR-Po-aGf"/>
@@ -172,6 +218,7 @@
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3ns-lw-5mE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="45g-XB-RPc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="761" y="765"/>
         </scene>
@@ -230,8 +277,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="新規追加" id="giq-kj-oDk">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="ERu-Oi-frs"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="ERu-Oi-frs">
+                            <connections>
+                                <action selector="saveWord" destination="QuQ-Sc-jYh" id="w7K-ey-lxd"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="englishTextField" destination="mZa-pP-s7S" id="3at-Ds-5iH"/>
+                        <outlet property="japaneseTextField" destination="cEo-rt-A65" id="p4E-M1-909"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XCm-9V-Man" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -259,6 +314,9 @@
                                     <fontDescription key="titleFontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="30"/>
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <segue destination="Ek0-BF-ZI2" kind="unwind" unwindAction="backWithSender:" id="XN5-zU-fiN"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="94Y-Wj-dWE"/>
@@ -275,6 +333,7 @@
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WaA-6F-NEs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="Ek0-BF-ZI2" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1464" y="94"/>
         </scene>
@@ -301,6 +360,9 @@
         <image name="fin" width="231" height="238"/>
         <image name="title_logo" width="373" height="179"/>
         <image name="word_blank" width="336" height="128"/>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
